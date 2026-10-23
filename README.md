@@ -1,70 +1,90 @@
-# Getting Started with Create React App
+<div align="center">
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h1>3D Particle Sphere</h1>
 
-## Available Scripts
+<p><b>A drop-in 3D particle sphere for any page.</b></p>
 
-In the project directory, you can run:
+<p><i>A Spline scene on a transparent page, so it floats over whatever your site already has behind it.</i></p>
 
-### `npm start`
+<h6>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+![Spline](https://img.shields.io/badge/Spline-react--spline%204-111111?style=flat-square)
+![React](https://img.shields.io/badge/React-18-111111?style=flat-square&logo=react&logoColor=white)
+![Live](https://img.shields.io/badge/live-GitHub%20Pages-7c7c8a?style=flat-square&logo=github&logoColor=white)
+![Status](https://img.shields.io/badge/status-2024%20experiment-555555?style=flat-square)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+</h6>
 
-### `npm test`
+<a href="https://parthchandak02.github.io/3d-particle-sphere/"><b>Live demo</b></a> ·
+<a href="#embed-it"><b>Embed it</b></a> ·
+<a href="#how-it-works"><b>How it works</b></a> ·
+<a href="#run-it"><b>Run it</b></a>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<br><br>
 
-### `npm run build`
+<a href="https://parthchandak02.github.io/3d-particle-sphere/"><img src="docs/assets/readme/hero.jpg" width="100%" alt="A sphere made of thousands of small white particles on a near-black background"></a>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<sub>Live capture from GitHub Pages, cropped to the sphere. The page itself is transparent; a dark background was added behind it for the screenshot.</sub>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+</div>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<br>
 
-### `npm run eject`
+A sphere of white particles, built in [Spline](https://spline.design) and rendered in the browser
+by `@splinetool/react-spline`. The page around it has no background of its own, so it can sit
+behind a hero section or inside an iframe and pick up the colour of the host page. White
+particles need a dark host to be visible.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Embed it
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The quickest route is an iframe of the live page. Iframes are transparent unless the framed page
+paints a background, and this one doesn't:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```html
+<div style="background:#0b0b10; height:600px">
+  <iframe src="https://parthchandak02.github.io/3d-particle-sphere/"
+          style="width:100%; height:100%; border:0" title="3D particle sphere"></iframe>
+</div>
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+In a React app, skip the iframe and load the scene directly; this is the whole of `src/App.js`:
 
-## Learn More
+```jsx
+import Spline from '@splinetool/react-spline';
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+export default function App() {
+  return (
+    <div style={{ width: '100vw', height: '100vh', backgroundColor: 'transparent' }}>
+      <Spline scene="https://prod.spline.design/Klk6kydm2OqssauT/scene.splinecode" />
+    </div>
+  );
+}
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## How it works
 
-### Code Splitting
+| Piece | Role |
+|---|---|
+| Spline scene (`prod.spline.design/.../scene.splinecode`) | The particle sphere itself: geometry, material and camera. It lives on Spline's CDN, not in this repo |
+| `@splinetool/react-spline` | Downloads the scene and renders it into a WebGL canvas |
+| `src/index.css` | Sets `html`, `body` and `#root` to full size, no margin, transparent background |
+| `gh-pages` | Publishes the Create React App build to the `gh-pages` branch |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Changing the sphere means editing the scene in Spline and re-exporting; the React code only
+points at the scene URL. The sphere sits right of centre, where the Spline camera puts it.
 
-### Analyzing the Bundle Size
+## Run it
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```bash
+git clone https://github.com/parthchandak02/3d-particle-sphere.git
+cd 3d-particle-sphere
+npm install
+npm start          # dev server on localhost:3000
+npm run deploy     # build and push to GitHub Pages
+```
 
-### Making a Progressive Web App
+<br>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<div align="center">
+<sub>Built with Spline, React 18 and Create React App. Apache 2.0.</sub>
+</div>
