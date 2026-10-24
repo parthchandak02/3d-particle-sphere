@@ -47,7 +47,7 @@ paints a background, and this one doesn't:
 </div>
 ```
 
-In a React app, skip the iframe and load the scene directly; this is the whole of `src/App.js`:
+In a React app, skip the iframe and load the scene directly; this is the whole of `src/App.jsx`:
 
 ```jsx
 import Spline from '@splinetool/react-spline';
@@ -68,7 +68,7 @@ export default function App() {
 | Spline scene (`prod.spline.design/.../scene.splinecode`) | The particle sphere itself: geometry, material and camera. It lives on Spline's CDN, not in this repo |
 | `@splinetool/react-spline` | Downloads the scene and renders it into a WebGL canvas |
 | `src/index.css` | Sets `html`, `body` and `#root` to full size, no margin, transparent background |
-| `gh-pages` | Publishes the Create React App build to the `gh-pages` branch |
+| `gh-pages` | Publishes the Vite build to the `gh-pages` branch |
 
 Changing the sphere means editing the scene in Spline and re-exporting; the React code only
 points at the scene URL. The sphere sits right of centre, where the Spline camera puts it.
@@ -86,5 +86,5 @@ npm run deploy     # build and push to GitHub Pages
 <br>
 
 <div align="center">
-<sub>Built with Spline, React 18 and Create React App. Apache 2.0.</sub>
+<sub>Built with Spline, React 18 and Vite. Apache 2.0.</sub>
 </div>
